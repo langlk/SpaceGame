@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InputHandler : MonoBehaviour
 {
-    public LayerMask layerMask;
     Status status;
     // Start is called before the first frame update
     void Start()
@@ -19,7 +18,8 @@ public class InputHandler : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, float.MaxValue, layerMask)) {
+            LayerMask mask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
+            if (Physics.Raycast(ray, out hit, float.MaxValue, mask)) {
                 status.PrintEffects();
             }
         }
