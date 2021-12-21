@@ -4,35 +4,58 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    public static event System.Action OnStatusChange;
-    bool shipCrashed;
+    public List<Metal> Materials;
+    public float failureRollInterval = 2;
+    float lastRolled;
+    List<Effect> effects = new List<Effect>();
     // Start is called before the first frame update
     void Start()
     {
-        
+        Ship.ShipCrashed += OnShipCrashed;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (!shipCrashed) CrashShip();
+    void FixedUpdate() {
+        ClearExpiredEffects();
+        if (Time.time - lastRolled > failureRollInterval) {
+            lastRolled = Time.time;
+            RollFailures();
+            PrintEffects();
+        }
     }
 
-    void CrashShip() {
-        print("Ship crashing");
-        shipCrashed = true;
-        if (OnStatusChange != null) {
-            // void crashUpdate(ref Dictionary<string, int> rates) {
-            //     rates["fractured"] = 1;
-            //     rates["warped"] = 1;
-            // }
-            OnStatusChange();
-            // yield return new WaitForSeconds(1);
-            // void postCrashUpdate(ref Dictionary<string, int> rates) {
-            //     rates["fractured"] = 100;
-            //     rates["warped"] = 100;
-            // }
-            // OnStatusChange(postCrashUpdate);
+    void OnDestroy() {
+        Ship.ShipCrashed -= OnShipCrashed;
+    }
+
+    void OnShipCrashed() {
+        effects.Add(new Effect("crashed", 4, Time.time));
+    }
+
+    void ClearExpiredEffects() {
+        effects.RemoveAll(effect => effect.maxDuration != -1 && Time.time > effect.timeStarted + effect.maxDuration);
+    }
+
+    void RollFailures() {
+        foreach (Metal material in Materials) {
+            material.RollFailures(ref effects);
+        }
+    }
+
+    void PrintEffects() {
+        foreach (Effect effect in effects) {
+            print(gameObject.name + " is " + effect.name);
+        }
+    }
+
+    public struct Effect {
+        public string name;
+        public float maxDuration;
+        public float timeStarted;
+
+        public Effect(string newName, float newDuration, float time) {
+            name = newName;
+            maxDuration = newDuration;
+            timeStarted = time;
         }
     }
 }

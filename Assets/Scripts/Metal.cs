@@ -4,48 +4,46 @@ using UnityEngine;
 
 public class Metal : MonoBehaviour
 {
-    Dictionary<string, int> rates = new Dictionary<string, int>{
-        { "rusted", 100 },
-        { "corroded", 100 },
-        { "fractured", 20 },
-        { "warped", 100 }
+    List<FailureReason> failureReasons = new List<FailureReason> {
+        new FailureReason("fractured", 100, -1, effects =>
+            effects.Exists(effect => effect.name == "crashed") ? 100 : 1),
+        new FailureReason("rusted", 100, -1, effects =>
+            effects.Exists(effect => effect.name == "damp") ? 10 : 1),
+        new FailureReason("warped", 100, -1, effects =>
+            effects.Exists(effect => effect.name == "crashed") ? 100 : 1),
+        new FailureReason("corroded", 100, -1, effects =>
+            effects.Exists(effect => effect.name == "acid") ? 20 : 1)
     };
-    float waitInterval = .5f;
-    float lastCalculated = 0;
-    
-    public delegate void UpdateRates(ref Dictionary<string, int> rates);
-    // Start is called before the first frame update
-    void Start()
-    {
-        Status.OnStatusChange += StatusChanged;
-        CalculateFailures();
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if (Time.time - lastCalculated > waitInterval) {
-            CalculateFailures();
-            lastCalculated = Time.time;
+    public delegate int RollModDelegate(List<Status.Effect> effects);
+
+    public void RollFailures(ref List<Status.Effect> effects) {
+        foreach (FailureReason reason in failureReasons) {
+            reason.RollFailure(ref effects);
         }
     }
 
-    void OnDestroy() {
-        Status.OnStatusChange -= StatusChanged; 
-    }
+    public struct FailureReason {
+        public string name;
+        public int baseRate;
+        public float duration;
+        public RollModDelegate ModifyRoll;
 
-    void CalculateFailures() {
-        foreach (KeyValuePair<string, int> kvp in rates) {
-            int d100 = Random.Range(1, kvp.Value + 1);
-            if (d100 == 1) {
-                print("Failure: " + transform.gameObject.name + " " + kvp.Key);
+        public FailureReason(string newName, int newRate, float newDuration, RollModDelegate newModifier) {
+            this.name = newName;
+            this.baseRate = newRate;
+            this.duration = newDuration;
+            this.ModifyRoll = newModifier;
+        }
+
+        public bool RollFailure(ref List<Status.Effect> effects) {
+            int rate = baseRate / ModifyRoll(effects);
+            if (Random.Range(0, rate) == 0) {
+                effects.Add(new Status.Effect(name, duration, Time.time));
+                return true;
             }
+            return false;
         }
-    }
-
-    void StatusChanged() {
-        print("Status change");
-        // updateRates(ref rates);
     }
 }
 
