@@ -39,7 +39,7 @@ public class Metal : MonoBehaviour
         public bool RollFailure(ref List<Status.Effect> effects) {
             int rate = baseRate / ModifyRoll(effects);
             if (Random.Range(0, rate) == 0) {
-                effects.Add(new Status.Effect(name, duration, Time.time));
+                effects.Add(new Status.Effect(name, duration, Time.time, true));
                 return true;
             }
             return false;

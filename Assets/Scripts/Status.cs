@@ -19,7 +19,6 @@ public class Status : MonoBehaviour
         if (Time.time - lastRolled > failureRollInterval) {
             lastRolled = Time.time;
             RollFailures();
-            PrintEffects();
         }
     }
 
@@ -41,9 +40,9 @@ public class Status : MonoBehaviour
         }
     }
 
-    void PrintEffects() {
+    public void PrintEffects() {
         foreach (Effect effect in effects) {
-            print(gameObject.name + " is " + effect.name);
+            print((effect.isFailure ? "Failure: " : "") + gameObject.name + " is " + effect.name);
         }
     }
 
@@ -51,11 +50,13 @@ public class Status : MonoBehaviour
         public string name;
         public float maxDuration;
         public float timeStarted;
+        public bool isFailure;
 
-        public Effect(string newName, float newDuration, float time) {
+        public Effect(string newName, float newDuration, float time, bool failure = false) {
             name = newName;
             maxDuration = newDuration;
             timeStarted = time;
+            isFailure = failure;
         }
     }
 }
