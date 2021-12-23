@@ -40,6 +40,16 @@ public class Status : MonoBehaviour
         }
     }
 
+    public string GetEffectsAsString() {
+        string effectString = "";
+        foreach (Effect effect in effects) {
+            if (effect.isFailure) {
+                effectString += effect.name + " ";
+            }
+        }
+        return effectString;
+    }
+
     public void PrintEffects() {
         foreach (Effect effect in effects) {
             print((effect.isFailure ? "Failure: " : "") + gameObject.name + " is " + effect.name);

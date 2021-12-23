@@ -7,6 +7,7 @@ public class InfoDisplay : MonoBehaviour
 {
     public GameObject infoPane;
     public Text systemName;
+    public Text systemStatus;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,5 +27,6 @@ public class InfoDisplay : MonoBehaviour
     void OnShowInfo(GameObject obj) {
         infoPane.SetActive(true);
         systemName.text = obj.name;
+        systemStatus.text = obj.GetComponent<Status>().GetEffectsAsString();
     }
 }
