@@ -22,6 +22,7 @@ public class InputHandler : MonoBehaviour
             LayerMask mask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
             if (Physics.Raycast(ray, out hit, float.MaxValue, mask)) {
                 if (ShowInfo != null) ShowInfo(gameObject);
+                status.PrintEffects();
             }
         }
     }

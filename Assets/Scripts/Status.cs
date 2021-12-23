@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Status : MonoBehaviour
 {
-    public List<Metal> Materials;
+    public List<Material> Materials;
     public float failureRollInterval = 2;
     float lastRolled;
     List<Effect> effects = new List<Effect>();
