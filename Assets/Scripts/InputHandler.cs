@@ -19,10 +19,10 @@ public class InputHandler : MonoBehaviour
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            LayerMask mask = LayerMask.GetMask(LayerMask.LayerToName(gameObject.layer));
-            if (Physics.Raycast(ray, out hit, float.MaxValue, mask)) {
-                if (ShowInfo != null) ShowInfo(gameObject);
-                status.PrintEffects();
+            if (Physics.Raycast(ray, out hit, float.MaxValue)) {
+                if (hit.transform.gameObject.layer == gameObject.layer && ShowInfo != null) {
+                    ShowInfo(gameObject);
+                }
             }
         }
     }
