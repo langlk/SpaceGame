@@ -827,8 +827,8 @@ GameObject:
   - component: {fileID: 328168190}
   - component: {fileID: 328168189}
   - component: {fileID: 328168188}
-  m_Layer: 0
-  m_Name: Crate
+  m_Layer: 7
+  m_Name: Crate 01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1249,8 +1249,8 @@ GameObject:
   - component: {fileID: 433059098}
   - component: {fileID: 433059097}
   - component: {fileID: 433059096}
-  m_Layer: 0
-  m_Name: Crate (1)
+  m_Layer: 7
+  m_Name: Crate 02
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3123,8 +3123,8 @@ GameObject:
   - component: {fileID: 1071129921}
   - component: {fileID: 1071129920}
   - component: {fileID: 1071129919}
-  m_Layer: 0
-  m_Name: Crate (2)
+  m_Layer: 7
+  m_Name: Crate 03
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4181,7 +4181,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1531805106}
-  m_Layer: 0
+  - component: {fileID: 1531805107}
+  - component: {fileID: 1531805109}
+  - component: {fileID: 1531805108}
+  m_Layer: 7
   m_Name: Cargo Bay
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4205,6 +4208,44 @@ Transform:
   m_Father: {fileID: 818217722}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1531805107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531805105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6b4904135f0a842648f9adf7df132e0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1531805108
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531805105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db280e824d0f4dabbe3402886ea3101, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Materials: []
+  failureRollInterval: 2
+--- !u!114 &1531805109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1531805105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d3e95f7f267340c4b8cf80fdd1a5ebb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1557087278
 GameObject:
   m_ObjectHideFlags: 0
