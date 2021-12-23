@@ -35,7 +35,7 @@ public class Status : MonoBehaviour
     }
 
     void RollFailures() {
-        foreach (Metal material in Materials) {
+        foreach (Material material in Materials) {
             material.RollFailures(ref effects);
         }
     }
