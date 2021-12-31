@@ -51,6 +51,7 @@ public class Status : MonoBehaviour
     }
 
     public void RemoveEffect(Effect e) {
+        print("Removing effect \"" + e.name + "\" from " + gameObject.name);
         effects.Remove(e);
     }
 
