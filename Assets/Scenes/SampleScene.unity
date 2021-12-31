@@ -2760,7 +2760,7 @@ GameObject:
   - component: {fileID: 856560719}
   - component: {fileID: 856560718}
   - component: {fileID: 856560717}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turbine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4340,7 +4340,7 @@ GameObject:
   - component: {fileID: 1557087282}
   - component: {fileID: 1557087281}
   - component: {fileID: 1557087280}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Fuel Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4532,7 +4532,7 @@ GameObject:
   - component: {fileID: 1593171754}
   - component: {fileID: 1593171753}
   - component: {fileID: 1593171752}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Turbine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5018,7 +5018,7 @@ GameObject:
   - component: {fileID: 1820202452}
   - component: {fileID: 1820202451}
   - component: {fileID: 1820202450}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Engine Room
   m_TagString: Untagged
   m_Icon: {fileID: 0}
