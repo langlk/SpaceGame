@@ -9,6 +9,7 @@ public class InfoDisplay : MonoBehaviour
     public Text systemName;
     public GameObject statusEffects;
     public GameObject statusButtonPrefab;
+    public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
@@ -47,7 +48,9 @@ public class InfoDisplay : MonoBehaviour
                 btn.transform.Translate(Vector3.down * i * btn.GetComponent<RectTransform>().rect.height);
             }
             Status.Effect e = effects[i];
-            btn.GetComponentInChildren<Text>().text = e.name;
+            Text t = btn.GetComponentInChildren<Text>();
+            t.text = e.name;
+            t.color = e.AvailableFixes(player.GetComponent<Inventory>().items).Count > 0 ? Color.black : Color.red;
             btn.GetComponent<Button>().onClick.AddListener(() => {
                 // Remove effect
                 status.RemoveEffect(e);

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Status : MonoBehaviour
@@ -60,12 +61,18 @@ public class Status : MonoBehaviour
         public float maxDuration;
         public float timeStarted;
         public bool isFailure;
+        public List<string> fixes;
 
-        public Effect(string newName, float newDuration, float time, bool failure = false) {
+        public Effect(string newName, float newDuration, float time, bool failure = false, List<string> newFixes = default(List<string>)) {
             name = newName;
             maxDuration = newDuration;
             timeStarted = time;
             isFailure = failure;
+            fixes = newFixes;
+        }
+
+        public List<string> AvailableFixes(List<string> inventory = default(List<string>)) {
+            return fixes.Where(fix => inventory.IndexOf(fix) != -1).ToList();
         }
     }
 }

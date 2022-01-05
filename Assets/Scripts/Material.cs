@@ -19,18 +19,20 @@ public class Material : MonoBehaviour
         public int baseRate;
         public float duration;
         public RollModDelegate ModifyRoll;
+        public List<string> fixes;
 
-        public FailureReason(string newName, int newRate, float newDuration, RollModDelegate newModifier) {
-            this.name = newName;
-            this.baseRate = newRate;
-            this.duration = newDuration;
-            this.ModifyRoll = newModifier;
+        public FailureReason(string newName, int newRate, float newDuration, RollModDelegate newModifier, List<string> newFixes) {
+            name = newName;
+            baseRate = newRate;
+            duration = newDuration;
+            ModifyRoll = newModifier;
+            fixes = newFixes;
         }
 
         public bool RollFailure(ref List<Status.Effect> effects) {
             int rate = baseRate / ModifyRoll(effects);
             if (Random.Range(0, rate) == 0) {
-                effects.Add(new Status.Effect(name, duration, Time.time, true));
+                effects.Add(new Status.Effect(name, duration, Time.time, true, fixes));
                 return true;
             }
             return false;

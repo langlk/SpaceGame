@@ -6,8 +6,13 @@ public class Flammable : Material
 {
     void Start() {
         failureReasons = new List<FailureReason> {
-            new FailureReason("on fire", 100, -1, effects =>
-                effects.Exists(effect => effect.name == "crashed") ? 100 : 1)
+            new FailureReason(
+                "on fire",
+                100,
+                -1,
+                effects => effects.Exists(effect => effect.name == "crashed") ? 100 : 1,
+                new List<string> { "fire extinguisher" }
+            )
         };
     }
 }
